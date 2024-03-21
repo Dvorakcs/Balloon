@@ -1,0 +1,7 @@
+.container-center{
+    display: flex;
+    justify-content: center;
+}
+.CanvasGame{
+    scale: 2;
+}
