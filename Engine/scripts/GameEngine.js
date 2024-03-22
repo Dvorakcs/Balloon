@@ -2,6 +2,7 @@ class GameEngine{
     #context = new CanvasEngine().context
     #controllerEngine = new ControllerEngine()
     #player = new Player();
+    #genericsBlockEngine = [new GenericsBlockEngine()]
     constructor(){
 
     }
@@ -14,10 +15,14 @@ class GameEngine{
     UPDATE(eventUpdate){
         
         
-
+        this.#genericsBlockEngine.forEach(block => {
+            block.UPDATE({})
+        });
         this.#player.UPDATE({
-            keys:this.#controllerEngine.GetKey
+            keys:this.#controllerEngine.GetKey,
+            Blocks:this.#genericsBlockEngine
         })
+        
         this.DRAW({
             context: this.#context,
         })
@@ -30,6 +35,9 @@ class GameEngine{
             //eventDraw.context.scale(2,2);
             eventDraw.context.fillStyle = "#000";
             eventDraw.context.fillRect(0, 0, 512, 720);
+            this.#genericsBlockEngine.forEach(block => {
+                block.DRAW(eventDraw)
+            });
             this.#player.DRAW(eventDraw)
         }
     }
